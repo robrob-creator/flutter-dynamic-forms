@@ -1,0 +1,30 @@
+{
+  "formTitle": "Grades",
+  "formModel": "dynamic",
+  "fields": [
+    {
+      "fieldType": "text",
+      "fieldName": "name",
+      "fieldLabel": "Name",
+      "isRequired": true
+    },
+    {
+      "fieldType": "number",
+      "fieldName": "math",
+      "fieldLabel": "Math Grade",
+      "isRequired": true
+    },
+    {
+      "fieldType": "number",
+      "fieldName": "english",
+      "fieldLabel": "English Grade",
+      "isRequired": true
+    },
+    {
+      "fieldType": "number",
+      "fieldName": "science",
+      "fieldLabel": "Science Grade",
+      "isRequired": true
+    }
+  ]
+}

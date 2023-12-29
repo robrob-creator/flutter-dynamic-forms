@@ -37,25 +37,29 @@ class FormModel {
 }
 
 class Field {
-  String? type;
-  String? label;
-  String? id;
+  String? fieldType;
+  String? fieldName;
+  String? fieldLabel;
+  bool? isRequired;
 
   Field({
-    this.type,
-    this.label,
-    this.id,
+    this.fieldType,
+    this.fieldName,
+    this.fieldLabel,
+    this.isRequired,
   });
 
   factory Field.fromJson(Map<String, dynamic> json) => Field(
-        type: json["type"],
-        label: json["label"],
-        id: json["id"],
+        fieldType: json["fieldType"],
+        fieldName: json["fieldName"],
+        fieldLabel: json["fieldLabel"],
+        isRequired: json["isRequired"],
       );
 
   Map<String, dynamic> toJson() => {
-        "type": type,
-        "label": label,
-        "id": id,
+        "fieldType": fieldType,
+        "fieldName": fieldName,
+        "fieldLabel": fieldLabel,
+        "isRequired": isRequired,
       };
 }
