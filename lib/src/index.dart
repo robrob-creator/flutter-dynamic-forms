@@ -33,25 +33,25 @@ class DynamicForm extends StatelessWidget {
             child: Column(
               children: [
                 ...(form.fields ?? []).map((field) {
-                  if (field.fieldType == "date") {
+                  if (field.type == "date") {
                     return NeumorphicDateField(
-                      label: field.fieldLabel,
-                      type: field.fieldType,
+                      label: field.label,
+                      type: field.type,
                       onChanged: (value) {
                         formValues = {
                           ...formValues,
-                          field.fieldLabel ?? 'label': value
+                          field.label ?? 'label': value
                         };
                       },
                     );
                   }
                   return NeumorphicTextField(
-                    label: field.fieldLabel,
-                    type: field.fieldType,
+                    label: field.label,
+                    type: field.type,
                     onChanged: (value) {
                       formValues = {
                         ...formValues,
-                        field.fieldLabel ?? 'label': value
+                        field.label ?? 'label': value
                       };
                     },
                   );

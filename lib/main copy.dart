@@ -84,7 +84,7 @@ class MyHomePage extends StatelessWidget {
           } else {
             return Scaffold(
                 appBar: NeumorphicAppBar(
-                  title: Text(snapshot.data?.formTitle ?? "Dynamic Form"),
+                  title: Text(snapshot.data?.title ?? "Dynamic Form"),
                 ),
                 backgroundColor: NeumorphicTheme.baseColor(context),
                 body: SingleChildScrollView(
@@ -93,7 +93,7 @@ class MyHomePage extends StatelessWidget {
                   onSubmit: (value) async {
                     String id = getId();
                     DatabaseReference ref = FirebaseDatabase.instance
-                        .ref("${snapshot.data?.formModel}/$id");
+                        .ref("${snapshot.data?.model}/$id");
                     await ref.set(value);
                   },
                 )));

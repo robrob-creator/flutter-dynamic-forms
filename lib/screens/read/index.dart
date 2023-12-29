@@ -29,7 +29,7 @@ class _ReadScreenState extends State<ReadScreen> {
     String jsonString =
         await rootBundle.loadString('assets/json/isaac_config.json');
     final FormModel form = FormModel.fromJson(jsonDecode(jsonString));
-    DatabaseReference dataList = FirebaseDatabase.instance.ref(form.formModel);
+    DatabaseReference dataList = FirebaseDatabase.instance.ref(form.model);
     dataList.onValue.listen((DatabaseEvent event) {
       final data = event.snapshot.value;
       inspect(data);
@@ -75,7 +75,7 @@ class _ReadScreenState extends State<ReadScreen> {
         } else {
           return Scaffold(
             appBar: AppBar(
-              title: Text(snapshot.data?.formTitle ?? "Dynamic Form"),
+              title: Text(snapshot.data?.title ?? "Dynamic Form"),
               backgroundColor: Colors.white,
               elevation: 0,
             ),
@@ -114,7 +114,7 @@ class _ReadScreenState extends State<ReadScreen> {
                             columns: snapshot.data?.fields?.map(
                                   (e) {
                                     return DataColumn(
-                                      label: Text(e.fieldLabel ?? "Label"),
+                                      label: Text(e.label ?? "Label"),
                                     );
                                   },
                                 )?.toList() ??
