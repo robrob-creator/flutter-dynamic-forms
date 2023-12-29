@@ -1,45 +1,61 @@
-import 'package:flutter/material.dart';
+// To parse this JSON data, do
+//
+//     final formModel = formModelFromJson(jsonString);
 
-class FormFieldModel {
-  final String type;
-  final String label;
-  final String id;
+import 'dart:convert';
 
-  // Additional properties for specific types
-  final TextInputType? keyboardType;
-  final bool? obscureText;
+FormModel formModelFromJson(String str) => FormModel.fromJson(json.decode(str));
 
-  FormFieldModel({
-    required this.type,
-    required this.label,
-    required this.id,
-    this.keyboardType,
-    this.obscureText,
+String formModelToJson(FormModel data) => json.encode(data.toJson());
+
+class FormModel {
+  String? formTitle;
+  String? formModel;
+  List<Field>? fields;
+
+  FormModel({
+    this.formTitle,
+    this.formModel,
+    this.fields,
   });
 
-  factory FormFieldModel.fromJson(Map<String, dynamic> json) {
-    return FormFieldModel(
-      type: json['type'],
-      label: json['label'],
-      id: json['id'],
-      keyboardType: _getKeyboardType(json['type']),
-      obscureText: json['type'] == 'password' ? true : null,
-    );
-  }
+  factory FormModel.fromJson(Map<String, dynamic> json) => FormModel(
+        formTitle: json["formTitle"],
+        formModel: json["formModel"],
+        fields: json["fields"] == null
+            ? []
+            : List<Field>.from(json["fields"]!.map((x) => Field.fromJson(x))),
+      );
 
-  static TextInputType? _getKeyboardType(String type) {
-    switch (type) {
-      case 'text':
-        return TextInputType.text;
-      case 'email':
-        return TextInputType.emailAddress;
-      case 'number':
-        return TextInputType.number;
-      case 'date':
-        return TextInputType.datetime; // You may need a date picker widget here
-      // Add more cases for other types as needed
-      default:
-        return null;
-    }
-  }
+  Map<String, dynamic> toJson() => {
+        "formTitle": formTitle,
+        "formModel": formModel,
+        "fields": fields == null
+            ? []
+            : List<dynamic>.from(fields!.map((x) => x.toJson())),
+      };
+}
+
+class Field {
+  String? type;
+  String? label;
+  String? id;
+
+  Field({
+    this.type,
+    this.label,
+    this.id,
+  });
+
+  factory Field.fromJson(Map<String, dynamic> json) => Field(
+        type: json["type"],
+        label: json["label"],
+        id: json["id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "type": type,
+        "label": label,
+        "id": id,
+      };
 }

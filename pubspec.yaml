@@ -38,6 +38,9 @@ dependencies:
     git:
       url: https://github.com/robrob-creator/Flutter-Neumorphic.git
       ref: master
+  firebase_core: ^2.24.2
+  firebase_database: ^10.3.8
+  objectid: ^3.0.0
 
 dev_dependencies:
   flutter_test:

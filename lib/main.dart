@@ -3,8 +3,18 @@ import 'dart:developer' as dev;
 import 'package:dynamic_form/src/index.dart';
 import 'package:dynamic_form/src/model.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:objectid/objectid.dart';
+import 'firebase_options.dart';
+import 'package:firebase_database/firebase_database.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -38,6 +48,8 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     const jsonString = '''
       {
+        "formTitle":"User Registration",
+        "formModel":"User",
         "fields": [
           {"type": "text", "label": "Name", "id": "name"},
           {"type": "email", "label": "Email", "id": "email"},
@@ -46,21 +58,26 @@ class MyHomePage extends StatelessWidget {
         ]
       }
     ''';
-    final List<FormFieldModel> formFields =
-        (jsonDecode(jsonString)['fields'] as List)
-            .map((data) => FormFieldModel.fromJson(data))
-            .toList();
+    final FormModel form = FormModel.fromJson(jsonDecode(jsonString));
+
+    String getId() {
+      String id = ObjectId().toString();
+      return id;
+    }
 
     return Scaffold(
       appBar: NeumorphicAppBar(
-        title: const Text("Dynamic Form"),
+        title: Text(form.formTitle ?? "Dynamic Form"),
       ),
       backgroundColor: NeumorphicTheme.baseColor(context),
       body: SingleChildScrollView(
           child: DynamicForm(
-        formFields: formFields,
-        onSubmit: (value) {
-          dev.inspect(value);
+        form: form,
+        onSubmit: (value) async {
+          String id = getId();
+          DatabaseReference ref =
+              FirebaseDatabase.instance.ref("${form.formModel}/$id");
+          await ref.set(value);
         },
       )),
     );

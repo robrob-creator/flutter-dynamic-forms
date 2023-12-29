@@ -4,7 +4,7 @@ import 'package:dynamic_form/src/model.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class DynamicForm extends StatelessWidget {
-  final List<FormFieldModel> formFields;
+  final FormModel form;
   final BoxDecoration? boxDecoration;
   final double? width;
   final double? height;
@@ -12,7 +12,7 @@ class DynamicForm extends StatelessWidget {
 
   const DynamicForm(
       {super.key,
-      required this.formFields,
+      required this.form,
       this.boxDecoration,
       this.height,
       this.width,
@@ -32,13 +32,16 @@ class DynamicForm extends StatelessWidget {
           child: Form(
             child: Column(
               children: [
-                ...formFields.map((field) {
+                ...(form.fields ?? []).map((field) {
                   if (field.type == "date") {
                     return NeumorphicDateField(
                       label: field.label,
                       type: field.type,
                       onChanged: (value) {
-                        formValues = {...formValues, field.label: value};
+                        formValues = {
+                          ...formValues,
+                          field.label ?? 'label': value
+                        };
                       },
                     );
                   }
@@ -46,7 +49,10 @@ class DynamicForm extends StatelessWidget {
                     label: field.label,
                     type: field.type,
                     onChanged: (value) {
-                      formValues = {...formValues, field.label: value};
+                      formValues = {
+                        ...formValues,
+                        field.label ?? 'label': value
+                      };
                     },
                   );
                 }).toList(),
