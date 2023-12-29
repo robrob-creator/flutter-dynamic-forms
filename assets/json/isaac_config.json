@@ -1,0 +1,37 @@
+{
+  "title": "Class Attendance",
+  "model": "class_attendance",
+  "fields": [
+    {
+      "name": "student_name",
+      "type": "text",
+      "label": "Student Name",
+      "required": true
+    },
+    {
+      "name": "student_id",
+      "type": "text",
+      "label": "Student ID",
+      "required": true
+    },
+    {
+      "name": "course",
+      "type": "text",
+      "label": "Course",
+      "required": true
+    },
+    {
+      "name": "date",
+      "type": "date",
+      "label": "Date",
+      "required": true
+    },
+    {
+      "name": "attendance_status",
+      "type": "select",
+      "label": "Attendance Status",
+      "required": true,
+      "options": ["Present", "Absent", "Late", "Excused"]
+    }
+  ]
+}
