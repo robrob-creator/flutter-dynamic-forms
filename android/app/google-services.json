@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "815092555544",
+    "firebase_url": "https://issac-6bb65-default-rtdb.firebaseio.com",
+    "project_id": "issac-6bb65",
+    "storage_bucket": "issac-6bb65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815092555544:android:454f67e6b5057d4e75086d",
+        "android_client_info": {
+          "package_name": "com.example.dynamic_form"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpoHoUjMZHSdsk8leFRyhZXTF4X9XUfKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
